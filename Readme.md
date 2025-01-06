@@ -4,9 +4,9 @@ This repository consists of classical cracks semantic segmentation methods such 
 
 # Quick Pipeline Visualization
 ## Example:Segmentation methods
-| Images after the warping |
+| Images after the segmentation |
 | ------------- |
-| ![](assets/crack_segmentation.png.png) |
+| ![](assets/crack_segmentation.png) |
 
 # Requirements
 MATLAB
