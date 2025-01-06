@@ -18,11 +18,14 @@ Cracks are the defects formed by cyclic loading, fatigue, shrinkage, creep, and 
 Sample images are used from the article: <br />
 [5]. Liu, Yahui, Jian Yao, Xiaohu Lu, Renping Xie, and Li Li. "DeepCrack: A deep hierarchical feature learning architecture for crack segmentation." Neurocomputing 338 (2019): 139-153.
 
+All cracks semantic segmentation methods tailored and fine-tuned are available to the public. If you use any of these programs in your research, please cite the above works.
+
 ## Original code repositories
 [1]. [MATLAB File Exchange: Hessian based Frangi Vesselness filter](https://www.mathworks.com/matlabcentral/fileexchange/24409-hessian-based-frangi-vesselness-filter) <br />
 [2]. [GitHub Repo: MFAT](https://github.com/Haifafh/MFAT)
 
-All cracks semantic segmentation methods tailored and fine-tuned are available to the public. If you use any of these programs in your research, please cite the above works . Lastly, the fine-tuned Hessian (Frangi) and Multiscale Fractional Anisotropic Tensor based on the Gaussian kernel sigmas for the cracks segmentation methods are also available to the public. Please use the following BibTeX entry to cite when used in your research:
+## Fine-tuned version
+The fine-tuned versions of Hessian (Frangi) and Multiscale Fractional Anisotropic Tensor based on the Gaussian kernel sigmas for the cracks segmentation methods are also available to the public. Please use the following BibTeX entry to cite when used in your research:
 ```bibtex
 @PhdThesis{preetham2021vision,
 author = {{Aghalaya Manjunatha}, Preetham},
