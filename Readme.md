@@ -9,13 +9,13 @@ Cracks are the defects formed by cyclic loading, fatigue, shrinkage, creep, and 
 | ![](assets/crack_segmentation.png) |
 
 # Citation
-## Original papers
+## Original articles:
 [1]. Salembier, P.: Comparison of some morphological segmentation algorithms based on contrast enhancement. Application to automatic defect detection. In: Proceedings of the EUSIPCO-90—Fifth European Signal Processing Conference, pp. 833–836 (1990). <br />
 [2]. Jahanshahi, Mohammad R., Sami F. Masri, Curtis W. Padgett, and Gaurav S. Sukhatme. "An innovative methodology for detection and quantification of cracks through incorporation of depth perception." Machine vision and applications 24 (2013): 227-241. <br />
 [3]. Frangi, A.F., Niessen, W.J., Vincken, K.L., Viergever, M.A. (1998). Multiscale vessel enhancement filtering. In: Wells, W.M., Colchester, A., Delp, S. (eds) Medical Image Computing and Computer-Assisted Intervention — MICCAI’98. MICCAI 1998. Lecture Notes in Computer Science, vol 1496. Springer, Berlin, Heidelberg. https://doi.org/10.1007/BFb0056195. <br />
 [4]. Alhasson, Haifa F., Shuaa S. Alharbi, and Boguslaw Obara. "2D and 3D vascular structures enhancement via multiscale fractional anisotropy tensor." In Proceedings of the European conference on computer vision (ECCV) workshops, pp. 0-0. 2018.
 
-Sample images are used from the article:
+Sample images are used from the article: <br />
 [5]. Liu, Yahui, Jian Yao, Xiaohu Lu, Renping Xie, and Li Li. "DeepCrack: A deep hierarchical feature learning architecture for crack segmentation." Neurocomputing 338 (2019): 139-153.
 
 All cracks semantic segmentation methods tailored and fine-tuned are available to the public. If you use any of these programs in your research, please cite the above works . Lastly, the fine-tuned Hessian (Frangi) and Multiscale Fractional Anisotropic Tensor based on the Gaussian kernel sigmas for the cracks segmentation methods are also available to the public. Please use the following BibTeX entry to cite when used in your research:
