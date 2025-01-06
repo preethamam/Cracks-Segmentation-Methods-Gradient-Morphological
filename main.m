@@ -125,35 +125,35 @@ for i = 1:length(imFiles)
             nexttile
             imshow(inputImage)
             if titleShow(1) == true
-                title('Original')
+                title('Original', 'fontsize', 25)
             end
             titleShow(1) = false;
         elseif mod(cnt, totalMethods+2) == 2   
             nexttile
             imshow(crackMaps{i,1})
             if titleShow(2) == true
-                title('Groundtruth')
+                title('Groundtruth', 'fontsize', 25)
             end
             titleShow(2) = false;            
         elseif mod(cnt, totalMethods+2) == 3 
             nexttile
             imshow(crackMaps{i,2})
             if titleShow(3) == true
-                title('Morpho')
+                title('Morpho', 'fontsize', 25)
             end
             titleShow(3) = false;            
         elseif mod(cnt, totalMethods+2) == 4   
             nexttile
             imshow(crackMaps{i,3})
             if titleShow(4) == true
-                title('Hessian')
+                title('Hessian', 'fontsize', 25)
             end
             titleShow(4) = false;             
         else
             nexttile
             imshow(crackMaps{i,4})            
             if titleShow(5) == true
-                title('MFAT')
+                title('MFAT', 'fontsize', 25)
             end
             titleShow(5) = false;
         end
