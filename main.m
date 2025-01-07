@@ -93,7 +93,7 @@ for i = 1:length(imFiles)
             % Blob filtering
             blobFilterImage = blobFilter(hessianOutputImage, blobFilterSigma);
         else
-            % Hessian/Frangi vessel filter crack detection            
+            % MFAT crack detection            
             switch MFAT_TYPE
                 case 'EigenFAT'
                     % Proposed Method (Eign values based version)

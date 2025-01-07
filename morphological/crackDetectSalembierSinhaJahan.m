@@ -1,5 +1,16 @@
 function [crackMap] = crackDetectSalembierSinhaJahan ...
                                     (IMnew, crackLEN, anglebetween)
+    % CRACKDETECTSALEMBIERSINHAJAHAN Detects cracks in an image using 
+    % morphological operations.
+    %   CRACKMAP = CRACKDETECTSALEMBIERSINHAJAHAN(IMNEW, CRACKLEN, ANGLEBETWEEN)
+    %   detects cracks in the image IMNEW using line structuring elements
+    %   of lengths specified in CRACKLEN and angles specified in ANGLEBETWEEN.
+    %
+    %   Example:
+    %       IMnew = imread('cracked_surface.png');
+    %       crackLEN = [5, 10, 15];
+    %       anglebetween = 0:45:135;
+    %       crackMap = crackDetectSalembierSinhaJahan(IMnew, crackLEN, anglebetween);
 
     % Initialize crackmap array
     crackMap = zeros(size(IMnew));

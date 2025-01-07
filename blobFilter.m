@@ -1,4 +1,14 @@
 function outputImage = blobFilter(BW1, blobfilter_sigma)    
+    % BLOBFILTER Filters out small blobs from a binary image.
+    %   OUTPUTIMAGE = BLOBFILTER(BW1, BLOBFILTER_SIGMA) removes blobs from
+    %   the binary image BW1 that are smaller than a threshold determined
+    %   by BLOBFILTER_SIGMA and the standard deviation of the blob areas.
+    %
+    %   Example:
+    %       BW1 = imread('binary_image.png');
+    %       blobfilter_sigma = 1.5;
+    %       outputImage = blobFilter(BW1, blobfilter_sigma);
+    
     % Get connected components
     CC = bwconncomp(BW1);
     S  = regionprops(CC,'Area');
