@@ -10,7 +10,7 @@ Cracks are the defects formed by cyclic loading, fatigue, shrinkage, creep, and 
 | ![](assets/crack_segmentation.png) |
 
 # Citation
-## Original articles:
+## Original articles
 [1]. Salembier, P.: Comparison of some morphological segmentation algorithms based on contrast enhancement. Application to automatic defect detection. In: Proceedings of the EUSIPCO-90—Fifth European Signal Processing Conference, pp. 833–836 (1990). <br />
 [2]. Jahanshahi, Mohammad R., Sami F. Masri, Curtis W. Padgett, and Gaurav S. Sukhatme. "An innovative methodology for detection and quantification of cracks through incorporation of depth perception." Machine vision and applications 24 (2013): 227-241. <br />
 [3]. Frangi, A.F., Niessen, W.J., Vincken, K.L., Viergever, M.A. (1998). Multiscale vessel enhancement filtering. In: Wells, W.M., Colchester, A., Delp, S. (eds) Medical Image Computing and Computer-Assisted Intervention — MICCAI’98. MICCAI 1998. Lecture Notes in Computer Science, vol 1496. Springer, Berlin, Heidelberg. https://doi.org/10.1007/BFb0056195. <br />
