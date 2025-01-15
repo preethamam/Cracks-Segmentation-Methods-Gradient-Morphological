@@ -7,6 +7,11 @@ Start = tic;
 
 %% Inputs
 %--------------------------------------------------------------------------
+% Image input
+%--------------------------------------------------------------------------
+imageIndex = 4;
+
+%--------------------------------------------------------------------------
 % Blob filtering
 %--------------------------------------------------------------------------
 blobFilterSigma = 0.5;
@@ -58,116 +63,82 @@ labelsimFiles = labels(~ismember({labels.name},{'.','..'}));
 addpath('hessian', 'mfat', 'morphological')
 
 %% Process images
-crackMaps = cell(length(imFiles), totalMethods+1);
 
-fh = figure('WindowState', 'maximized');
-t = tiledlayout(length(imFiles), totalMethods+2, TileSpacing="tight", Padding="tight");
-cnt = 1;
-titleShow = true(1, totalMethods+2);
+% Image read
+inputImage = imread(fullfile(imFiles(imageIndex).folder, imFiles(imageIndex).name));
 
-for i = 1:length(imFiles)
-    % Image read
-    inputImage = imread(fullfile(imFiles(i).folder, imFiles(i).name));
+% Labels
+labels = imread(fullfile(labelsimFiles(imageIndex).folder, labelsimFiles(imageIndex).name));
 
-    % Labels
-    labels = imread(fullfile(labelsimFiles(i).folder, labelsimFiles(i).name));
+% Convert to grayscale
+imageGray = double(rgb2gray(inputImage));
 
-    % Convert to grayscale
-    imageGray = double(rgb2gray(inputImage));
-        
-    for m = 1:totalMethods+2        
-        % Crack detection morphological
-        if m == 1
-            % Morphological crack detection
-            morphoOutputImage = crackDetectSalembierSinhaJahan(imageGray, crackLEN, anglebetween);
-        
-            % Blob filtering
-            blobFilterImage = blobFilter(morphoOutputImage, blobFilterSigma);
-        elseif m == 2        
-            % Hessian/Frangi vessel filter crack detection
-            [Ivessel,Scale,Direction] = FrangiFilter2D(imageGray, frangiOptions);
+%% Detect cracks using three methods
+%-----------------------------------------------------------------------------------------------   
+% Morphological crack detection
+morphoOutputImage = crackDetectSalembierSinhaJahan(imageGray, crackLEN, anglebetween);
 
-            % Binarize the image
-            hessianOutputImage = imbinarize(Ivessel, graythresh(Ivessel));
+% Blob filtering
+blobFilterImageMorpho = blobFilter(morphoOutputImage, blobFilterSigma);
 
-            % Blob filtering
-            blobFilterImage = blobFilter(hessianOutputImage, blobFilterSigma);
-        else
-            % MFAT crack detection            
-            switch MFAT_TYPE
-                case 'EigenFAT'
-                    % Proposed Method (Eign values based version)
-                    Ivessel = FractionalIstropicTensor(imageGray, MFAToptions);
-                    Ivessel = normalize(Ivessel);
-                case 'ProbabilisticFAT'
-                    % Proposed Method (probability based version)
-                    % Ivessel = ProbabiliticMFATSpacing(imageGray, MFAToptions);
-                    Ivessel = ProbabiliticMFATSigmas(imageGray, MFAToptions);
-                    Ivessel = normalize(Ivessel);
-            end
-            
-            % Binarize the image
-            mfatOutputImage = imbinarize(Ivessel, graythresh(Ivessel));
+%-----------------------------------------------------------------------------------------------
+% Hessian/Frangi vessel filter crack detection
+[Ivessel,Scale,Direction] = FrangiFilter2D(imageGray, frangiOptions);
 
-            % Blob filtering
-            blobFilterImage = blobFilter(mfatOutputImage, blobFilterSigma);
-        end
+% Binarize the image
+hessianOutputImage = imbinarize(Ivessel, graythresh(Ivessel));
 
-        % Save crackmaps
-        if m == 1
-            crackMaps{i,m} = labels;
-        elseif m <= totalMethods+1
-            crackMaps{i,m} = blobFilterImage;
-        end
-    
-        % Image show
-        if mod(cnt, totalMethods+2) == 1
-            nexttile
-            imshow(inputImage)
-            if titleShow(1) == true
-                title('Original', 'fontsize', 25)
-            end
-            titleShow(1) = false;
-        elseif mod(cnt, totalMethods+2) == 2   
-            nexttile
-            imshow(crackMaps{i,1})
-            if titleShow(2) == true
-                title('Groundtruth', 'fontsize', 25)
-            end
-            titleShow(2) = false;            
-        elseif mod(cnt, totalMethods+2) == 3 
-            nexttile
-            imshow(crackMaps{i,2})
-            if titleShow(3) == true
-                title('Morpho', 'fontsize', 25)
-            end
-            titleShow(3) = false;            
-        elseif mod(cnt, totalMethods+2) == 4   
-            nexttile
-            imshow(crackMaps{i,3})
-            if titleShow(4) == true
-                title('Hessian', 'fontsize', 25)
-            end
-            titleShow(4) = false;             
-        else
-            nexttile
-            imshow(crackMaps{i,4})            
-            if titleShow(5) == true
-                title('MFAT', 'fontsize', 25)
-            end
-            titleShow(5) = false;
-        end
-        cnt = cnt + 1;
-    end
+% Blob filtering
+blobFilterImageHessian = blobFilter(hessianOutputImage, blobFilterSigma);
+
+%-----------------------------------------------------------------------------------------------
+% MFAT crack detection            
+switch MFAT_TYPE
+    case 'EigenFAT'
+        % Proposed Method (Eign values based version)
+        Ivessel = FractionalIstropicTensor(imageGray, MFAToptions);
+        Ivessel = normalize(Ivessel);
+    case 'ProbabilisticFAT'
+        % Proposed Method (probability based version)
+        % Ivessel = ProbabiliticMFATSpacing(imageGray, MFAToptions);
+        Ivessel = ProbabiliticMFATSigmas(imageGray, MFAToptions);
+        Ivessel = normalize(Ivessel);
 end
-exportgraphics(fh, 'crack_segmentation.png')
 
+% Binarize the image
+mfatOutputImage = imbinarize(Ivessel, graythresh(Ivessel));
 
-%% Show single crack image
-figure;
-ax = gca;
-imshow(crackMaps{3,4})
-exportgraphics(ax, 'crack_output.png')
+% Blob filtering
+blobFilterImageMFAT = blobFilter(mfatOutputImage, blobFilterSigma);
+        
+%% Show crack detection results
+fh = figure('WindowState', 'maximized');
+t = tiledlayout(2, 3, TileSpacing="tight", Padding="compact");
+
+% Plot input image
+nexttile
+imshow(inputImage)
+title('Original', 'fontsize', 25)
+
+% Plot ground-truth image
+nexttile
+imshow(labels)
+title('Groundtruth', 'fontsize', 25)
+
+% Plot mopho output image
+nexttile
+imshow(blobFilterImageMorpho)
+title('Morpho', 'fontsize', 25)
+
+% Plot Hessian output image
+nexttile
+imshow(blobFilterImageHessian)
+title('Hessian', 'fontsize', 25)
+
+% Plot MFAT output image
+nexttile
+imshow(blobFilterImageMFAT)
+title('MFAT', 'fontsize', 25)
 
 %% End parameters
 %--------------------------------------------------------------------------
