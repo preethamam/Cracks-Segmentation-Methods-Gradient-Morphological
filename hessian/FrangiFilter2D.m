@@ -14,6 +14,8 @@ function [outIm,whatScale,Direction] = FrangiFilter2D(I, options)
 %       .FrangiBetaTwo : Frangi correction constant, default 15
 %       .BlackWhite : Detect black ridges (default) set to true, for
 %                       white ridges set to false.
+%       .FWHM : Gaussian Full Width at Half Maximum (FWHM) value of a 
+%               Gaussian sigma scales
 %       .verbose : Show debug information, default true
 %
 % outputs,
@@ -32,7 +34,8 @@ function [outIm,whatScale,Direction] = FrangiFilter2D(I, options)
 % Written by Marc Schrijver, 2/11/2001
 % Re-Written by D.Kroon University of Twente (May 2009)
 
-defaultoptions = struct('FrangiScaleRange', [1 10], 'FrangiScaleRatio', 2, 'FrangiBetaOne', 0.5, 'FrangiBetaTwo', 15, 'verbose',true,'BlackWhite',true);
+defaultoptions = struct('FrangiScaleRange', [1 10], 'FrangiScaleRatio', 2, 'FrangiBetaOne', 0.5, 'FrangiBetaTwo', 15, 'verbose',true,'BlackWhite',true,...
+                        'FWHM', true);
 
 % Process inputs
 if(~exist('options','var')), 
@@ -47,8 +50,14 @@ else
     end
 end
 
-sigmas=options.FrangiScaleRange(1):options.FrangiScaleRatio:options.FrangiScaleRange(2);
-sigmas = sort(sigmas, 'ascend');
+if options.FWHM
+    sigmas = [1e-5 options.FrangiScaleRange(1):options.FrangiScaleRatio:options.FrangiScaleRange(2)];  
+    [filterSizeArray, ia, ic] = unique([1 2 * ceil(2.355 * sigmas) + 1], 'last');
+    sigmas = filterSizeArray;
+else
+    sigmas=options.FrangiScaleRange(1):options.FrangiScaleRatio:options.FrangiScaleRange(2);
+    sigmas = sort(sigmas, 'ascend');
+end
 
 beta  = 2*options.FrangiBetaOne^2;
 c     = 2*options.FrangiBetaTwo^2;

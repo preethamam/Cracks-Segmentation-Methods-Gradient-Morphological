@@ -31,11 +31,14 @@ anglebetween = [0 45 90 135]; % [0 : delta : 179], use symmetry
 %--------------------------------------------------------------------------
 % Hessian options/Inputs
 %--------------------------------------------------------------------------
-frangiOptions.FrangiScaleRange = [1, 15];
+frangiOptions.FrangiScaleRange  = [0.7181, 5];
+frangiOptions.FrangiScaleRatio  = 0.25;
 frangiOptions.FrangiBetaOne     = 0.5;
 frangiOptions.FrangiBetaTwo     = 50;
 frangiOptions.BlackWhite        = 1;
+frangiOptions.FWHM              = 1;
 frangiOptions.verbose           = 0;
+
 
 %--------------------------------------------------------------------------
 % Multiscale fractional anisotropic tensor options/Inputs

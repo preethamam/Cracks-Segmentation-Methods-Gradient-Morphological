@@ -30,6 +30,7 @@ frangiOptions.FrangiScaleRange = [1, 15];
 frangiOptions.FrangiBetaOne     = 0.5;
 frangiOptions.FrangiBetaTwo     = 50;
 frangiOptions.BlackWhite        = 1;
+frangiOptions.FWHM              = 1;
 frangiOptions.verbose           = 0;
 
 %--------------------------------------------------------------------------
