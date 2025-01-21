@@ -46,7 +46,7 @@ else
 end
 ```
 
-Multiscale Fractional Anisotropic Tensor
+Multiscale Fractional Anisotropic Tensor:
 ```matlab
 %% Sigmas and filter sizes
 [filterSizeArray, ia, ic] = unique([1 2 * ceil(2.355 * sigmas) + 1], 'last');
