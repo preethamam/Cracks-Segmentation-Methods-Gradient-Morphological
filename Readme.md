@@ -32,8 +32,21 @@ For the segmentation of the cracks, the right size of the Gaussian filter is nec
 
 The above figure show the linear relationship, y = 1.1758x + 0.5153, R<sup>2</sup> = 0.9996, of the actual crack width and the Gaussian filter (or kernel) diameter. Here the filter size is 2 x ceil(2.355 x sigma), ceil is the ceiling function and 2.355 is the Full Width at Half Maximum (FWHM) value of a Gaussian function. Although, the width of the crack is 2 x sigma using FWHM extracts the crack pixels clearly due to larger tails of the filter.
 
-The fine-tuned versions of Hessian (Frangi) and Multiscale Fractional Anisotropic Tensor ([ProbabiliticMFATSigmas.m](mfat/ProbabiliticMFATSigmas.m)) based on the Gaussian kernel sigmas for the cracks segmentation methods are also available to the public. Below is the MATLAB snippet that converts the Gaussian scales to FWHM:
+The fine-tuned versions of Hessian/Frangi ([FrangiFilter2D.m](hessian/FrangiFilter2D.m)) and Multiscale Fractional Anisotropic Tensor ([ProbabiliticMFATSigmas.m](mfat/ProbabiliticMFATSigmas.m)) based on the Gaussian kernel FWHM sigmas for the cracks segmentation methods are also available to the public. Below is the MATLAB snippets that converts the Gaussian scales to FWHM:
 
+Hessian:
+```matlab
+if options.FWHM
+    sigmas = [1e-5 options.FrangiScaleRange(1):options.FrangiScaleRatio:options.FrangiScaleRange(2)];  
+    [filterSizeArray, ia, ic] = unique([1 2 * ceil(2.355 * sigmas) + 1], 'last');
+    sigmas = filterSizeArray;
+else
+    sigmas=options.FrangiScaleRange(1):options.FrangiScaleRatio:options.FrangiScaleRange(2);
+    sigmas = sort(sigmas, 'ascend');
+end
+```
+
+Multiscale Fractional Anisotropic Tensor
 ```matlab
 %% Sigmas and filter sizes
 [filterSizeArray, ia, ic] = unique([1 2 * ceil(2.355 * sigmas) + 1], 'last');
