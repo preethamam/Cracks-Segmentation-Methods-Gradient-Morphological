@@ -54,7 +54,7 @@ ia = [ia(1:end-1); ia(end)-1];
 sigmas = sigmas(ia);
 ```
 
-Please use the following BibTeX entry to cite when used in your research:
+Please use the following BibTeX entry to cite when fine-tuned FWHM kernel codes are used in your research:
 ```bibtex
 @PhdThesis{preetham2021vision,
 author = {{Aghalaya Manjunatha}, Preetham},
