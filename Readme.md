@@ -28,7 +28,16 @@ All cracks semantic segmentation methods tailored and fine-tuned are available t
 ## Fine-tuned version
 For the segmentation of the cracks, the right size of the Gaussian filter is necessary. A smaller filter size misses the crack pixels and a larger one increases the false positives. To set the appropriate filter size, the camera properties need to be known to transverse from world to camera coordinates. Generally, the operation and maintenance department of structures has the periodic history of the crack's physical properties and probable range of thicknesses with a risk factor. Based on this information and the type of structure, the right filter size can be estimated in the case of the unavailability of the camera intrinsic parameters. show the linear relationship, y = 1.1758x + 0.5153, R<sup>2</sup> = 0.9996, of the actual crack width and the Gaussian filter (or kernel) diameter. Here the filter size is 2 x ceil(2.355 x sigma), ceil is the ceiling function and 2.355 is the Full Width at Half Maximum (FWHM) value of a Gaussian function. Although, the width of the crack is 2 x sigma using FWHM extracts the crack pixels clearly due to larger tails of the filter.
 
-The fine-tuned versions of Hessian (Frangi) and Multiscale Fractional Anisotropic Tensor ([ProbabiliticMFATSigmas.m](mfat/ProbabiliticMFATSigmas.m)) based on the Gaussian kernel sigmas for the cracks segmentation methods are also available to the public. Please use the following BibTeX entry to cite when used in your research:
+The fine-tuned versions of Hessian (Frangi) and Multiscale Fractional Anisotropic Tensor ([ProbabiliticMFATSigmas.m](mfat/ProbabiliticMFATSigmas.m)) based on the Gaussian kernel sigmas for the cracks segmentation methods are also available to the public. Below is the MATLAB snippet that converts the Gaussian scales to FWHM:
+
+```matlab
+%% Sigmas and filter sizes
+[filterSizeArray, ia, ic] = unique([1 2 * ceil(2.355 * sigmas) + 1], 'last');
+ia = [ia(1:end-1); ia(end)-1];
+sigmas = sigmas(ia);
+```
+
+Please use the following BibTeX entry to cite when used in your research:
 ```bibtex
 @PhdThesis{preetham2021vision,
 author = {{Aghalaya Manjunatha}, Preetham},
