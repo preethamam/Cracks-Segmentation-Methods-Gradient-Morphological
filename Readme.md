@@ -34,7 +34,7 @@ The above figure show the linear relationship, y = 1.1758x + 0.5153, R<sup>2</su
 
 The fine-tuned versions of Hessian/Frangi ([FrangiFilter2D.m](hessian/FrangiFilter2D.m)) and Multiscale Fractional Anisotropic Tensor ([ProbabiliticMFATSigmas.m](mfat/ProbabiliticMFATSigmas.m)) based on the Gaussian kernel FWHM sigmas for the cracks segmentation methods are also available to the public. Below is the MATLAB snippets that converts the Gaussian scales to FWHM:
 
-Hessian:
+Hessian/Frangi Filter:
 ```matlab
 if options.FWHM
     sigmas = [1e-5 options.FrangiScaleRange(1):options.FrangiScaleRatio:options.FrangiScaleRange(2)];  
