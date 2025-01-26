@@ -70,7 +70,7 @@ note = {Condition assessment, Crack localization, Crack change detection, Synthe
 
 # Requirements
 MATLAB <br />
-MATLAB Image Processing Toolbox
+Image Processing Toolbox
 
 # Feedback
 Please rate and provide feedback for the further improvements.
